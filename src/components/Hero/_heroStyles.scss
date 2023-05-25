@@ -1,239 +1,284 @@
-.hero-wrapper{
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 5rem);
-    //background-color: aqua;
-  
-    .hero-section-center{
-      background-color: $secondaryClr;
-      width: 70%;
-      height: 25rem;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      text-align: center;
-      align-items: center;
-      border-radius: 8px;
-  
-      .sub.hero-txt p{
-        display: none;
-      }
-  
-      .sub.hero-txt .main-header{
-        padding: 0 2rem;
-        font-size: 1.2rem;
-        color: $textClr;
-        margin: 3rem 0;
-      }
-  
-      button{
-        background-color: $textClr;
-        border-radius: 8px;
-        padding: .7rem 0;
-        margin: 2rem 0;
-        color: $primaryClr;
-        width: 120px;
-        cursor: pointer;
-      }
-    }
-  
-    .hero-section-center{
-      position: relative;
-  
-      .sub.hero-img{
-        position: absolute;
-        top: -20%;
-        left: 50%;
-        transform: translateX(-50%);
-        
-       h3, .explore-btn{
-        display: none;
-       }
-      }
-    }
+@mixin flex($direction, $horizontal, $vertical) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $horizontal;
+  align-items: $vertical;
+}
+@mixin defaultAnimationDuration($sec: 0.7s) {
+  transition: $sec ease-in-out;
 }
 
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin-top: 2rem;
+  box-shadow: $shadow;
 
-
-@media (min-width: 400px) and (max-width: 700px){
-  .hero-wrapper {
-
-  .hero-section-center{
+  .hero-section-center {
+    background-color: $secondaryClr;
+    width: 70%;
+    height: 25rem;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 20rem;
-   
-    
-    .sub.hero-txt .main-header{
-      margin: 1rem 0;
-    }
+    @include flex(column, flex-end, center);
+    text-align: center;
+    border-radius: 8px;
 
-    button{
-      margin: 1rem 0;
-    }
-  }
- }
-}
-
-
-@media screen and (min-width: 700px) {
-  .nav-wrapper .nav-wrapper-center {
-    padding: 1.5rem 2.5rem 1.5rem 2.5rem;
-    .links {
-      display: flex;
-      justify-content: space-evenly;
-      gap: 2rem;
-      align-items: center;
+    .sub.hero-txt p {
+      line-height: 1.5rem;
       color: $linksText;
-    }
-    .hamburger-icon {
       display: none;
     }
-  }
-  .mobile-links{
-    display: none;
-  }
-  .hero-wrapper{
-  .hero-section-center{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 5.5rem;
-    gap: 0;
-    padding: 0;
-    height: 420px;
-    width: 90%;
-    background-color: transparent;
-    .sub.hero-img{
-      //z-index: 1;
-      position: static;
-      transform: none;
-      inset: 0%;
-      flex: 1;
+
+    .sub.hero-txt .main-header {
+      padding: 0 2rem;
+      font-size: 1.2rem;
+      color: $textClr;
+      margin: 3rem 0;
       width: 100%;
-      max-width: 300px;
-      //margin: 0 auto;
-      height: 100%;
-      display: block;
-      border-radius: 10px;
-      background-color: $secondaryClr;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      //place-content: center;
-      img{
-        height: 250px;
-        width:  250px;
-        object-fit: cover;
-      }
-
-      h3, .explore-btn, img{
-        display: block;
-        padding: 0;
-        margin: 0;
-      }
-
-       h3{
-        color: $textClr;
-       }
-
-       .explore-btn{
-        width: 130px;
-        padding: .5rem 1rem;
-        background-color: transparent;
-        border: .5px solid $textClr;
-        border-radius: 10px;
-        color: $textClr;
-        cursor: pointer;
-       
-      &:hover{
-        transition: .35s ease-in-out;
-        background: $textClr;
-        color: $primaryClr;
-      }
-      }
-
     }
-    .sub.hero-txt{
-      height: 100%;
-      z-index: 1;
-      background-color: transparent;
-      text-align: start;
-      max-width: 500px;
-      flex: 1;
-      padding-right: 1rem;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content:flex-start;
-      text-align: start;
-      align-items: flex-start;
 
-      p{
-        display: block;
+    button {
+      background-color: $textClr;
+      border-radius: 8px;
+      padding: 0.7rem 0;
+      margin: 2rem 0;
+      color: $primaryClr;
+      width: 120px;
+      cursor: pointer;
+    }
+
+    .sub.hero-txt .main-header {
+      @include defaultAnimationDuration(2s);
+      transform: translateX(-150%);
+    }
+    .sub.hero-txt button {
+      @include defaultAnimationDuration(2s);
+      transform: translateX(250%);
+    }
+
+    .sub.hero-img img {
+      @include defaultAnimationDuration(2s);
+      transform: translateY(-150%);
+    }
+  }
+
+  .hero-section-center {
+    position: relative;
+
+    .sub.hero-img {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      h3,
+      .explore-btn {
+        display: none;
+      }
+    }
+  }
+
+  .hero-section-center.Animate-hero-section {
+    .sub.hero-txt .main-header {
+      @include defaultAnimationDuration(1s);
+      transform: translateX(0%);
+    }
+    .sub.hero-txt button {
+      @include defaultAnimationDuration(1s);
+      transform: translateX(0%);
+    }
+
+    .sub.hero-img img {
+      @include defaultAnimationDuration(1s);
+      transform: translateY(0%);
+    }
+  }
+}
+
+@media (min-width: 400px) and (max-width: 700px) {
+  .hero-wrapper {
+    .hero-section-center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 20rem;
+
+      .sub.hero-txt .main-header {
+        margin: 1rem 0;
       }
 
-      .main-header{
-        padding: 0;
+      button {
+        margin: 1rem 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .hero-wrapper {
+    height: 100vh;
+    .hero-section-center {
+      display: flex;
+      @include flex(row, space-between, center);
+      gap: 0;
+      padding: 0;
+      height: 420px;
+      width: 90%;
+      background-color: transparent;
+      .sub.hero-img {
+        position: static;
+        transform: none;
+        inset: 0%;
+        flex: 1;
+        width: 100%;
+        max-width: 300px;
+        height: 100%;
+        display: block;
+        border-radius: 10px;
+        background-color: $secondaryClr;
+        @include flex(column, space-evenly, center);
+        text-align: center;
         margin: 0;
-        h1{
-          font-size: 3rem;
+        padding: 0;
+        img {
+          height: 250px;
+          width: 250px;
+          object-fit: cover;
+        }
+
+        h3,
+        .explore-btn,
+        img {
+          display: block;
+          padding: 0;
+          margin: 0;
+        }
+
+        h3 {
+          color: $textClr;
+        }
+
+        .explore-btn {
+          width: 130px;
+          padding: 0.5rem 1rem;
+          background-color: transparent;
+          border: 0.5px solid $textClr;
+          border-radius: 10px;
+          color: $textClr;
+          cursor: pointer;
+
+          &:hover {
+            transition: 0.35s ease-in-out;
+            background: $textClr;
+            color: $primaryClr;
+          }
         }
       }
-      button{
-        display: grid;
-        place-content: center;
+
+      .sub.hero-txt {
+        height: 100%;
+        z-index: 1;
+        background-color: transparent;
+        text-align: start;
+        max-width: 500px;
+        flex: 1;
+        padding-right: 1rem;
+        margin: 0;
+        @include flex(column, flex-start, flex-start);
+        text-align: start;
+
+        p {
+          display: block;
+        }
+
+        .main-header {
+          padding: 0;
+          margin: 0;
+          h1 {
+            font-size: 3rem;
+          }
+        }
+        button {
+          display: grid;
+          place-content: center;
+        }
+
+        h1,
+        p,
+        button {
+          margin: 0rem;
+          padding: 0rem;
+          max-width: 500px;
+        }
+
+        h1 {
+          margin: 0.8rem 0;
+        }
+
+        p {
+          margin: 0.3rem 0;
+        }
+
+        button {
+          margin: 1.8rem 0;
+          padding: 0.7rem;
+        }
       }
 
-      h1,p,button{
-        margin: 0rem;
-        padding: 0rem;
-        max-width: 500px;
-     }
+      .sub.hero-img {
+        transform: translateX(150%);
+        @include defaultAnimationDuration(2s);
+      }
+      .sub.hero-txt {
+        transform: translateX(-150%);
+        @include defaultAnimationDuration(2s);
+      }
+    }
+    .hero-section-center .sub.hero-img img {
+      @include defaultAnimationDuration(2s);
+      transform: translateY(0%);
+    }
 
-     h1{
-      //background-color: yellowgreen;
-      margin: .8rem 0;
-     }
-
-     p{
-      //background-color: rebeccapurple;
-      margin: .3rem 0;
-     }
-
-     button{
-      margin: 1.8rem 0;
-      padding: .7rem;
-     }
-      
+    .hero-section-center.Animate-hero-section {
+      .sub.hero-txt,
+      .sub.hero-img {
+        transform: translateX(0%);
+        @include defaultAnimationDuration(2s);
+      }
+      .sub.hero-txt {
+        .main-header {
+          @include defaultAnimationDuration(1s);
+        }
+      }
     }
   }
- }
 }
 
-
-@media (min-width: 700px) and (max-width: 850px){
-  .hero-wrapper .hero-section-center{
-     .sub.hero-txt .main-header{
-       h1{
+@media (min-width: 700px) and (max-width: 850px) {
+  .hero-wrapper .hero-section-center {
+    .sub.hero-txt .main-header {
+      h1 {
         font-size: 2.2rem;
-       }
- }
+      }
+    }
   }
 }
 
-@media screen and (min-width: 900px) {
-  .nav-wrapper .nav-wrapper-center {
-    padding: 1.7rem 4.5rem 1.7rem 4.5rem;
+@media screen and (min-width: 1150px) {
+  .hero-wrapper {
+    .hero-section-center {
+      .sub.hero-txt {
+        .main-header {
+          width: 40rem;
+          h1 {
+            max-width: 40rem;
+          }
+        }
+      }
+    }
   }
 }

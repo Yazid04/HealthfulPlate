@@ -3,18 +3,19 @@ import "./styles/styles.css";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/homepage/Home.jsx";
 import { SearchPage } from "./pages/searchpage/SearchPage.jsx";
-
+import Error from "./pages/errorPage/Error";
 
 function App() {
   return (
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/Search" element={<SearchPage />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );
-}; 
+}
 
 export default App;
 
