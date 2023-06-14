@@ -102,9 +102,8 @@ const NavBar = () => {
           {links.map((link) => {
             const { id, icon, name, clicked, linkAddress } = link;
             return (
-              <Link to={`/${linkAddress}`}>
+              <Link key={id} to={`/${linkAddress}`}>
                 <li
-                  key={id}
                   className={`${clicked ? "btn-clicked" : ""}`}
                   onClick={() => handleBtnsChange(id)}
                 >

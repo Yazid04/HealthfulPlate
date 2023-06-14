@@ -1,0 +1,13 @@
+.wrapper-shared{
+    width: 100%;
+    height: calc(100vh - 15rem);
+    display: grid;
+    place-content: center;
+
+    .center-shared{
+        width: 80%;
+        text-align: center;
+        margin: auto;
+        height: 5rem;
+    }
+}
