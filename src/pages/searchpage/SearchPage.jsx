@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 
 export const SearchPage = () => {
-  const { dataState, setQuery, setAddedFilters } = useGlobalContext();
+  const { dataState, setQuery } = useGlobalContext();
   const { data, error, isLoading } = dataState;
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const filtersParentRef = useRef(null);
