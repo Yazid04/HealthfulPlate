@@ -68,7 +68,7 @@ const NavBar = () => {
       <section className={`nav-wrapper`}>
         <div className="nav-wrapper-center">
           <h1 className="header">
-            <span>Healthful</span>plate
+            <Link to={`/`}> <span>Healthful</span>plate</Link>
           </h1>
           <div
             className="hamburger-icon"

@@ -432,6 +432,7 @@
   max-width: 25rem;
   color: #8D877E;
   margin-bottom: 2.2rem;
+  line-height: 1.3rem;
 }
 .services-wrapper .single-service .pt-1 button {
   padding: 0.7rem 1rem;
@@ -593,7 +594,7 @@
 .search-wrapper .search-input-parent {
   width: 80%;
   margin: auto;
-  margin-top: 8rem;
+  padding: 2rem 0;
 }
 .search-wrapper .search-input-parent .center {
   display: flex;
@@ -627,76 +628,6 @@
 }
 .search-wrapper .search-input-parent .center .searchBar-center .icon-wrapper .search-icon {
   font-size: 1.5rem;
-}
-.search-wrapper .search-input-parent .center .add-filter-btn {
-  margin: 1rem 0;
-}
-.search-wrapper .search-input-parent .center .add-filter-btn button {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 2rem;
-  width: 8rem;
-  background-color: #084941;
-  color: #F0EADA;
-  border-radius: 2px;
-  cursor: pointer;
-  margin-bottom: 1rem;
-}
-.search-wrapper .search-input-parent .filter-options {
-  padding: 1rem 0;
-  display: none;
-  overflow: hidden;
-  height: 0;
-  transition: 2s ease-in-out;
-}
-.search-wrapper .search-input-parent .filter-options .filters {
-  margin-bottom: 1rem;
-  background-color: #084941;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  padding: 1rem;
-  max-width: 35rem;
-}
-.search-wrapper .search-input-parent .filter-options .filters h2 {
-  color: #F0EADA;
-}
-.search-wrapper .search-input-parent .filter-options .filters .single-filter-type {
-  width: 100%;
-  height: -moz-min-content;
-  height: min-content;
-  padding: 0.5rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: flex-start;
-  align-items: center;
-}
-.search-wrapper .search-input-parent .filter-options .filters .single-filter-type .filter {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 1rem;
-  cursor: pointer;
-  width: 10rem;
-  height: 2rem;
-  background-color: #FFCB45;
-  transition: 0.35s ease-in-out;
-}
-.search-wrapper .search-input-parent .filter-options .filters .single-filter-type .filter button {
-  padding-left: 0.5rem;
-}
-.search-wrapper .search-input-parent .filter-options .filters .single-filter-type .filter .add-filter-icon {
-  transition: 0.35s ease-in-out;
-}
-.search-wrapper .search-input-parent .filter-options .filters .single-filter-type .filter.checked {
-  transition: 0.3s ease-in-out;
-  background-color: #F0EADA;
-}
-.search-wrapper .search-input-parent .filter-options.open-filters {
-  transition: 2s ease-in-out;
-  display: block;
-  overflow: auto;
-  height: auto;
 }
 .search-wrapper .search-results-parent {
   height: -moz-min-content;
@@ -767,6 +698,75 @@
   height: 5rem;
 }
 
+.wrapper {
+  background-color: #f0eada;
+  padding-top: 5rem;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper .wrapper-center {
+  width: 85%;
+  height: 80%;
+  background-color: #084941;
+}
+.wrapper .wrapper-center .sec-1 {
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  overflow: hidden;
+  padding: 4rem;
+}
+.wrapper .wrapper-center .sec-1 .title {
+  color: #f0eada;
+}
+.wrapper .wrapper-center .switch-btns-parent {
+  background-color: white;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  margin-left: 1.5rem;
+  width: 18rem;
+  overflow: hidden;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.wrapper .wrapper-center .switch-btns-parent .btn {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+.wrapper .wrapper-center .switch-btns-parent .btn p {
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  .wrapper .wrapper-center .sec-1 {
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+    height: -moz-min-content;
+    height: min-content;
+    padding: 0;
+  }
+  .wrapper .wrapper-center .sec-1 .title {
+    padding: 1rem;
+  }
+  .wrapper .wrapper-center .sec-1 .switch-btns-parent {
+    margin-top: 1.5rem;
+  }
+}
 body,
 ::after,
 ::before,
