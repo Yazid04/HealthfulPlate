@@ -1,37 +1,41 @@
 .wrapper {
-  background-color: #f0eada;
-  padding-top: 5rem;
-  height: 100vh;
+  background-color: $primaryClr;
   width: 100%;
+  margin: 0 auto;
+  height: fit-content;
+  margin-bottom: 8rem;
   display: flex;
   justify-content: center;
-  align-items: center;
 
   .wrapper-center {
     width: 85%;
-    height: 80%;
-    background-color: #084941;
+    height: min-content;
+    background-color: $textClr;
+    margin-top: 8rem;
+    padding-bottom: 3rem;
+    border-radius: 25px;
 
     .sec-1 {
       height: 4rem;
       display: flex;
+      margin-bottom: 0.1rem;
       justify-content: space-between;
       align-items: center;
       font-weight: bold;
       overflow: hidden;
-      padding: 4rem;
+      padding: 4rem 2rem;
 
       .title {
-        color: #f0eada;
+        display: block;
+        color: $primaryClr;
       }
     }
 
     .switch-btns-parent {
-      background-color: white;
+      background-color: $primaryClr;
       border-radius: 50%;
       position: relative;
       display: flex;
-      margin-left: 1.5rem;
       width: 18rem;
       overflow: hidden;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -55,24 +59,149 @@
         }
       }
     }
+
+    .calculation-panel-parent {
+      .panel-center {
+        max-width: 1200px;
+        margin: 0 4rem;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+
+        // generic styles for all boxes
+        .single-parameter-parent {
+          background-color: $secondaryClr;
+          color: $textClr;
+          height: 8rem;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: start;
+          padding: 0 1rem;
+
+          .header {
+            color: $textClr;
+            font-weight: bold;
+          }
+        }
+        // styles for inputs that aren't custom
+        .single-parameter-parent:not(.custom) {
+          .input-parent input {
+            appearance: none;
+            background: none;
+            border: none;
+            width: 100%;
+            height: 2rem;
+            padding: 1.5rem 2rem 1.5rem 1rem;
+            color: $textClr;
+            font-size: 1rem;
+            box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.16),
+              0px 0px 0px rgba(0, 0, 0, 0.23);
+          }
+          .input-parent input:focus {
+            outline: 0;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16),
+              0px 6px 12px rgba(0, 0, 0, 0.23);
+          }
+          .input-parent input::placeholder {
+            color: $textClr;
+          }
+        }
+        // styles for custom inputs (radio inputs)
+        .single-parameter-parent.custom.custom-radio-input {
+          .input-parent {
+            .center {
+              //background-color: red;
+              width: 20rem;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                label {
+                  padding:0 0.5rem;
+                }
+                input {
+                  height: 1rem;
+                  width: 1rem;
+                }
+              }
+            }
+          }
+        }
+        
+        // styles for custom inputs (activity levels)
+        .single-parameter-parent.custom.custom-activity-level {
+          padding: 1.5rem;
+          min-height: 15rem;
+          overflow: auto;
+        
+          
+           .header {
+             margin-bottom: 1rem;
+             display: flex;
+        
+             span {
+               font-size: 0.8rem;
+               font-weight: bold;
+               line-height: 1.4rem;
+             }
+           }
+           .input-parent {
+        
+             button {
+               /* Button style */
+                 margin: .5rem;
+                 display: inline-block;
+                 padding: 5px 10px;
+                 font-size: 16px;
+                 background-color: rgb(40, 122, 113);
+                 color: $primaryClr; 
+                 border: none;
+                 border-radius: 5px;
+                 cursor: pointer;
+                 transition: background-color 0.3s ease;
+               }
+        
+               /* Hover effect */
+               button:hover {
+                 background-color: $textClr;/* Darker blue on hover */
+             }
+           }
+         }
+        
+      }
+    }
   }
 }
 
+// mobile screens
 @media screen and (max-width: 700px) {
   .wrapper .wrapper-center {
     .sec-1 {
-      flex-direction: column;
-      align-items: start;
-      justify-content: space-evenly;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
       height: min-content;
-      padding: 0;
+      padding-top: 1rem;
 
       .title {
         padding: 1rem;
+        display: none;
       }
 
       .switch-btns-parent {
         margin-top: 1.5rem;
+      }
+    }
+    .calculation-panel-parent {
+      .panel-center {
+        grid-template-columns: repeat(1, 1fr);
       }
     }
   }
