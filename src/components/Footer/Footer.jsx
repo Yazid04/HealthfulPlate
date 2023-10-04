@@ -22,7 +22,7 @@ const Footer = () => {
             <div>
               <p>
                 ciapus street{" "}
-                <div className="city-country">Bogor, Indonesia</div>
+                <span className="city-country">Bogor, Indonesia</span>
               </p>
             </div>
           </div>

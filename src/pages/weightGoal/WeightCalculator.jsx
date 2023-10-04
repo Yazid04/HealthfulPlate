@@ -3,7 +3,7 @@ import Nav from "../../components/Nav/Nav";
 import Footer from "../../components/Footer/Footer";
 
 const WeightCalculator = () => {
-  const [systemInfo, setSystemInfo] = useState("metric system");
+  const [systemInfo, setSystemInfo] = useState("Metric system");
   const [divStyle, setDivStyle] = useState({
     position: "absolute",
     transform: "translateX(0%)",
@@ -16,12 +16,18 @@ const WeightCalculator = () => {
   });
   const [activityLevel, setActivityLevel] = useState("Sedentary");
   const [index, setIndex] = useState(0);
-
-  const [inputValues, setInputValues] = useState({
-    "Current Weight": "",
-    "Goal Weight": "",
+  const [userData, setUserData] = useState({
+    Gender: { optionsss: ["Male", "Female", "Other"], val: "" },
     Age: "",
     Height: "",
+    Timeframe: { optionsss: ["gradual", "moderate", "aggresive"], val: "" },
+    "Weight Goal": {
+      optionsss: ["Gain weight", "loss weight", "maintain current weight"],
+      val: "",
+    },
+    "Current Weight": "",
+    "Goal Weight": "",
+    "Activity level": "",
   });
 
   const titles = [
@@ -75,48 +81,55 @@ const WeightCalculator = () => {
     {
       title: "Weight Goal",
       options: ["Gain weight", "loss weight", "maintain current weight"],
-      name: "weight goal",
+      name: "Weight Goal",
     },
   ];
 
-  const data = {
-    currentWeight: "",
-    goalWeight: "",
-    gender: "",
-    age: "",
-    height: "",
-    timeFrame: "",
-    weightGoal: "",
-  };
-
   const btnSwitch = () => {
     setSystemInfo((prevState) =>
-      prevState === "metric system" ? "Imperial system" : "metric system"
+      prevState === "Metric system" ? "Imperial system" : "Metric system"
     );
-    setInputValues((prev) => {
+    setUserData((prev) => {
       const updatedInputValues = {};
       for (const key in prev) {
-        updatedInputValues[key] = "";
+        if (typeof prev[key] === "object" && prev[key].hasOwnProperty("val")) {
+          updatedInputValues[key] = { ...prev[key], val: "" };
+        } else {
+          updatedInputValues[key] = "";
+        }
       }
       return updatedInputValues;
     });
+
+    setActivityLevel("Sedentary");
   };
 
   const toggleActivityLevel = (text, idx) => {
     setActivityLevel(text);
     setIndex(idx);
+    setUserData((prev) => ({
+      ...prev,
+      "Activity level": text,
+    }));
   };
 
   const handleChange = (e) => {
     e.preventDefault();
-  };
+    const { name, value } = e.target;
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setInputValues((prevInputValues) => ({
-      ...prevInputValues,
-      [name]: value,
-    }));
+    // Check if the target element is a radio input
+    if (e.target.type === "radio") {
+      const newValue = e.target.checked ? value : ""; // Toggle the radio input value
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        [name]: { optionsss: prevUserData[name].optionsss, val: newValue },
+      }));
+    } else {
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        [name]: value,
+      }));
+    }
   };
 
   const elements = titles.map((item, i) => {
@@ -134,17 +147,19 @@ const WeightCalculator = () => {
           <div className="input-parent">
             <form className="center">
               {item.options.map((elm, i) => {
-                const uni = i * 50;
+                const uniqueId = i * 99 * 50;
                 return (
                   <div key={i}>
                     <input
                       type="radio"
-                      id={uni}
                       name={item.name}
                       value={item.options[i]}
+                      checked={userData[item.title].val === item.options[i]}
                       onChange={(e) => handleChange(e)}
+                      id={uniqueId}
                     />
-                    <label style={{ whiteSpace: "nowrap" }} htmlFor={uni}>
+
+                    <label style={{ whiteSpace: "nowrap" }} htmlFor={uniqueId}>
                       {item.options[i]}
                     </label>
                   </div>
@@ -163,7 +178,12 @@ const WeightCalculator = () => {
           <div className="header">
             <div>
               <h2>Activity level:</h2>
-              <span> {item.options[index].description}</span>
+              <span>
+                {" "}
+                {activityLevel === "Sedentary"
+                  ? item.options[0].description
+                  : item.options[index].description}
+              </span>
             </div>
           </div>
           <div className="input-parent">
@@ -188,10 +208,10 @@ const WeightCalculator = () => {
           <div className="header">{item.title}: </div>
           <div className="input-parent">
             <input
-              name={item.title}
-              value={inputValues[item.title]}
-              onChange={handleInputChange}
               type="text"
+              name={item.title}
+              value={userData[item.title] || ""}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -200,18 +220,16 @@ const WeightCalculator = () => {
   });
 
   useEffect(() => {
-    if (systemInfo === "Imperial system") {
-      setDivStyle({
-        ...divStyle,
-        transform: "translateX(100%)",
-      });
-    } else {
-      setDivStyle({
-        ...divStyle,
-        transform: "translateX(0%)",
-      });
-    }
+    setDivStyle((prevDivStyle) => ({
+      ...prevDivStyle,
+      transform:
+        systemInfo === "Imperial system"
+          ? "translateX(100%)"
+          : "translateX(0%)",
+    }));
   }, [systemInfo]);
+
+  //console.log(userData);
 
   return (
     <>
@@ -244,6 +262,6 @@ const WeightCalculator = () => {
 
 export default WeightCalculator;
 
-// complete gathering the data
-// study the calculations
-// then apply
+// add a button for getting the results and it's functionality
+// optimize the code && study the calculations
+// apply

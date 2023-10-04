@@ -183,13 +183,13 @@
         height: 100%;
         z-index: 1;
         background-color: transparent;
-        text-align: start;
+        text-align: left;
         max-width: 500px;
         flex: 1;
         padding-right: 1rem;
         margin: 0;
         @include flex(column, flex-start, flex-start);
-        text-align: start;
+        text-align: left;
 
         p {
           display: block;
