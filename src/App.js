@@ -6,7 +6,7 @@ import { SearchPage } from "./pages/searchpage/SearchPage.jsx";
 import Error from "./pages/errorPage/Error";
 import RecipePage from "./pages/singleRecipe/RecipePage";
 import WeightCalculator from "./pages/weightGoal/WeightCalculator";
-
+import { CalculatorProvider } from "./pages/weightGoal/CalculatorContext";
 
 function App() {
   return (
@@ -15,7 +15,16 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/Search/:id" element={<RecipePage />} />
-        <Route path="/Weight_Calculator" element={<WeightCalculator/>} />
+
+        <Route
+          path="/Weight_Calculator"
+          element={
+            <CalculatorProvider>
+              <WeightCalculator />
+            </CalculatorProvider>
+          }
+        />
+
         <Route path="*" element={<Error />} />
       </Routes>
     </>
