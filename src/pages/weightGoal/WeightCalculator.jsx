@@ -16,7 +16,6 @@ const WeightCalculator = () => {
     handleChange,
     getResult,
     inputsValidity,
-    ALL_INPUTS_VALID_MSG,
   } = useCalculatorContext();
 
   const invalidInputName = inputsValidity.invalidInputName;
@@ -151,6 +150,10 @@ const WeightCalculator = () => {
 export default WeightCalculator;
 
 
-// reduce the number css lines (apply more dynamic scss)  
-// study the calculations
-// apply
+// Close the result box when there is invalid Input - DONE
+// Put a warning message in the result box - DONE 
+// Apply a copy to clipboard functionality - DONE
+// reduce the number css lines (apply more dynamic scss) - DONE
+// make the messages for gain and lose weight more user-friendly - DONE  
+// study the calculation process
+// Apply

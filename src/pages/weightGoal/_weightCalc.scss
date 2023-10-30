@@ -1,11 +1,23 @@
+@mixin flex($direction: row, $horizontal: center, $vertical: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $horizontal;
+  align-items: $vertical;
+}
+
+@mixin grid($horizontal: center, $vertical: center) {
+  display: grid;
+  place-content: $horizontal;
+  align-items: $vertical;
+}
+
 .wrapper {
   background-color: $primaryClr;
   width: 100%;
   margin: 0 auto;
   height: fit-content;
   margin-bottom: 3rem;
-  display: flex;
-  justify-content: center;
+  @include flex();
 
   .wrapper-center {
     width: 85%;
@@ -17,10 +29,8 @@
 
     .sec-1 {
       height: 4rem;
-      display: flex;
       margin-bottom: 0.1rem;
-      justify-content: space-between;
-      align-items: center;
+      @include flex(row, space-between, center);
       font-weight: bold;
       overflow: hidden;
       padding: 4rem 2rem;
@@ -46,9 +56,7 @@
       .btn {
         height: 100%;
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex();
         border-radius: 15px;
         transition: 0.2s ease-in-out;
         cursor: pointer;
@@ -56,8 +64,7 @@
         p {
           height: 3rem;
           display: flex;
-          justify-content: center;
-          align-items: center;
+          @include flex();
         }
       }
     }
@@ -67,18 +74,15 @@
         max-width: 1200px;
         margin: 0 4rem;
         display: grid;
-        gap: 2rem;
         grid-template-columns: 1fr 1fr;
+        gap: 2rem;
 
         // generic styles for all boxes
         .single-parameter-parent {
           background-color: $secondaryClr;
           color: $textClr;
           height: 8rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-          align-items: flex-start;
+          @include flex(column, space-evenly, flex-start);
           padding: 0 1rem;
           width: auto;
 
@@ -87,7 +91,6 @@
             font-weight: bold;
           }
         }
-
         // styles for inputs that are NOT custom
         .single-parameter-parent:not(.custom) {
           .input-parent input {
@@ -116,7 +119,7 @@
         }
         .single-parameter-parent:not(.custom) {
           .input-parent.error input {
-           border: 2px solid red;
+            border: 2px solid $errorClr;
           }
         }
 
@@ -125,19 +128,13 @@
           .input-parent {
             width: 15rem;
             .center {
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
+              @include flex(row, flex-start, center);
               gap: 0.5rem;
               flex-wrap: wrap;
               width: 20rem;
-              //font-weight: bold;
               div {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @include flex();
                 padding-right: 1rem;
-
                 label {
                   padding: 0 0.5rem;
                   font-family: "Kanit", sans-serif;
@@ -151,9 +148,8 @@
           }
         }
         .single-parameter-parent.custom.custom-radio-input.error {
-          border: 4px solid red; 
+          border: 4px solid $errorClr;
         }
-
         // styles for custom input (activity levels)
         .single-parameter-parent.custom.custom-activity-level {
           padding: 1.5rem;
@@ -196,8 +192,9 @@
             }
           }
         }
+        // error color
         .single-parameter-parent.custom.custom-activity-level.error {
-          border: 4px solid red;
+          border: 4px solid $errorClr;
         }
 
         .single-parameter-parent:nth-child(1),
@@ -237,26 +234,23 @@
         }
       }
     }
-    .error-msg{
+    .error-msg {
       width: 100%;
       height: min-content;
       padding: 1rem;
       margin-top: 1rem;
       text-align: center;
 
-      p{
-        color: red;
-        font-family: "Kanit", sans-serif;;
+      p {
+        color: $errorClr;
+        font-family: "Kanit", sans-serif;
       }
     }
   }
 }
 
 .btn-wrapper {
-  //background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex();
 
   .result-btn {
     margin: 0.5rem;
@@ -280,24 +274,68 @@
   transition: height 2s;
   transition: margin 1.5s;
   transition: padding 1.5s;
-  display: grid;
-  place-content: center;
 
   width: 80%;
   margin: 2rem auto;
-  padding: 0 1rem;
   background-color: $secondaryClr;
-  height: 120px;
+  height: min-content;
   border-top: 2px solid rgb(53, 43, 43);
 
-  .sub {
-    height: min-content;
-    color: $textClr;
-    font-family: "Kanit", sans-serif;
-    padding: 1rem;
-    margin: 5px;
-    font-size: 1.3rem;
-    text-align: center;
+  .user-result {
+    height: 100%;
+    @include flex(column, flex-start, center);
+
+    .clipbaord-icon {
+      flex: 10%;
+      width: 100%;
+      padding: 1rem;
+      @include flex(row, flex-end, center);
+
+      .copied-msg {
+        transition: 0.5s ease-in-out;
+        color: transparent;
+        margin-right: 0rem;
+        font-family: "kanit", sans-serif;
+        font-size: 1.2rem;
+      }
+      .icon {
+        font-size: 1.6rem;
+        cursor: pointer;
+        color: grey;
+      }
+    }
+
+    .clipbaord-icon.show {
+      .copied-msg {
+        color: $successClr;
+        margin-right: 1rem;
+      }
+      .icon {
+        color: $successClr;
+      }
+    }
+
+    .result-msg {
+      margin-bottom: 2.5rem;
+      flex: 25%;
+      padding: 0 2rem;
+      @include flex();
+      .sub {
+        color: $textClr;
+        font-family: "Kanit", sans-serif;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+    }
+
+    .disclaimer-msg {
+      flex: 65%;
+      width: 75%;
+      margin: 0 auto;
+      @include flex(row, center, flex-end);
+      padding-bottom: 1.5rem;
+      text-align: center;
+    }
   }
 }
 
@@ -307,8 +345,55 @@
   padding: 0;
 }
 
-// tablet screens
+// mobile screens
 @media screen and (max-width: 700px) {
+  .wrapper .wrapper-center {
+    .sec-1 {
+      display: flex;
+      justify-content: center;
+      .title {
+        display: none;
+      }
+    }
+    .calculation-panel-parent {
+      .panel-center {
+        margin: 0 2rem;
+        grid-template-columns: repeat(1, 1fr);
+        display: flex;
+        flex-direction: column;
+
+        .single-parameter-parent.custom.custom-activity-level {
+          height: min-content;
+          padding: 2rem 2rem;
+          grid-column: span 1;
+        }
+        .single-parameter-parent:last-child {
+          grid-column: span 1;
+        }
+        .single-parameter-parent.custom.custom-radio-input {
+          .input-parent {
+            .center {
+              gap: 0rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  .results-wrapper {
+    .user-result {
+      .result-msg{margin-bottom: 1.5rem} .sub {
+        font-size: 1.3rem;
+      }
+      .disclaimer-msg .sub {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// tablet screens
+@media screen and (min-width: 701px) and (max-width: 1000px) {
   .wrapper .wrapper-center {
     .sec-1 {
       flex-direction: row;
@@ -344,33 +429,13 @@
       }
     }
   }
-}
-
-// mobile screens
-@media screen and (max-width: 1000px) {
-  .wrapper .wrapper-center {
-    .calculation-panel-parent {
-      .panel-center {
-        margin: 0 2rem;
-        grid-template-columns: repeat(1, 1fr);
-        display: flex;
-        flex-direction: column;
-
-        .single-parameter-parent.custom.custom-activity-level {
-          height: min-content;
-          padding: 2rem 2rem;
-          grid-column: span 1;
-        }
-        .single-parameter-parent:last-child {
-          grid-column: span 1;
-        }
-        .single-parameter-parent.custom.custom-radio-input {
-          .input-parent {
-            .center {
-              gap: 0rem;
-            }
-          }
-        }
+  .results-wrapper {
+    .user-result {
+      .result-msg .sub {
+        font-size: 1.2rem;
+      }
+      .disclaimer-msg .sub {
+        font-size: 0.7rem;
       }
     }
   }

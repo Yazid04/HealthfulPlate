@@ -7,14 +7,12 @@ const CalculatorProvider = ({ children }) => {
       id: "1",
       val: "",
       expectedValueType: "number",
-      status: "filled",
       title: "Current Weight",
     },
     "Goal Weight": {
       id: "2",
       val: "",
       expectedValueType: "number",
-      status: "filled",
       title: "Goal Weight",
     },
     Gender: {
@@ -26,21 +24,18 @@ const CalculatorProvider = ({ children }) => {
       ],
       val: "",
       expectedValueType: "char",
-      status: "filled",
       title: "Gender",
     },
     Age: {
       id: "4",
       val: "",
       expectedValueType: "number",
-      status: "filled",
       title: "Age",
     },
     "Activity level": {
       id: "5",
       val: "Sedentary",
       expectedValueType: "char",
-      status: "filled",
       title: "Activity level",
       options: [
         {
@@ -73,7 +68,6 @@ const CalculatorProvider = ({ children }) => {
       id: "6",
       val: "",
       expectedValueType: "number",
-      status: "",
       title: "Height",
     },
     Timeframe: {
@@ -85,19 +79,17 @@ const CalculatorProvider = ({ children }) => {
       ],
       val: "",
       expectedValueType: "char",
-      status: "filled",
       title: "Timeframe",
     },
     "Weight Goal": {
       id: "8",
       options: [
         ["Gain weight", "80"],
-        ["loss weight", "81"],
+        ["lose weight", "81"],
         ["maintain current weight", "82"],
       ],
       val: "",
       expectedValueType: "char",
-      status: "filled",
       title: "Weight Goal",
     },
   });
@@ -197,37 +189,37 @@ const CalculatorProvider = ({ children }) => {
         ) {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true, "Inputs should ONLY contain positive whole numbers and NOT be empty.", propertyValue.title);
+        updateInputValidity(true, 'Inputs should ONLY contain positive whole numbers and NOT be empty.', propertyValue.title);
         return inputsValidity; // Terminate the loop immediately when an invalid input is found
       } 
       // if the current weight is less than the goal weight, then the weight goal can't be "loss weight"
-      else if (currentWeightVal < goalWeightVal && weightGoal === "loss weight") {
+      else if (currentWeightVal < goalWeightVal && weightGoal === "lose weight") {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true, "Your goal weight should be lower than your current weight for a 'Lose Weight' goal.", propertyValue.title);
+        updateInputValidity(true, 'Your current weight should be higher than your goal weight for a "Lose Weight" goal.', propertyValue.title);
         return inputsValidity;
       } 
       // if the current weight is more than the goal weight, then the weight goal can't be "gain weight"
       else if (currentWeightVal > goalWeightVal && weightGoal === "Gain weight") {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true,"Your goal weight should be higher than your current weight for a 'Gain Weight' goal.", propertyValue.title);
+        updateInputValidity(true,'Your current weight should be lower than your goal weight for a "Gain Weight" goal.', propertyValue.title);
         return inputsValidity
       } 
       // if the current weight is not equal to the goal weight, then user can't choose "maintain current weight" as a weight goal
       else if (currentWeightVal !== goalWeightVal && weightGoal === "maintain current weight") {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true, "If your goal is to 'Maintain Current Weight', the current weight and goal weight should be the same. Please enter the same value for both.", propertyValue.title);
+        updateInputValidity(true, 'If your goal is to "Maintain Current Weight", the current weight and goal weight should be the same. Please enter the same value for both.', propertyValue.title);
         return inputsValidity;
       } 
       // if the current weight is equal to the goal weight, then user can't choose anything beside "maintain current weight" as a weight goal
       else if (currentWeightVal === goalWeightVal && weightGoal !== "maintain current weight") {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true, "If your goal is not to 'Maintain Current Weight,' having the same value for both current and goal weight might not be in line with your intended weight change. Please review your weight goal to ensure it accurately represents your intentions.", propertyValue.title);
+        updateInputValidity(true, 'If your goal is not to "Maintain Current Weight," having the same value for both current and goal weight might not be in line with your intended weight change. Please review your weight goal to ensure it accurately represents your intentions.', propertyValue.title);
         return inputsValidity;
-      }      
+      }
     }
 
     if (!hasInvalidInputs) {
