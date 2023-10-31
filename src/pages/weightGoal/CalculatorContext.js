@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect} from "react";
 const CalculatorContext = createContext();
 
 const CalculatorProvider = ({ children }) => {
@@ -46,7 +46,7 @@ const CalculatorProvider = ({ children }) => {
         },
         {
           id: "51",
-          name: "lightly Active",
+          name: "Lightly Active",
           description:
             "Lightly Active: People who engage in some light physical activity or exercise, such as walking or light housework, but spend most of their day in a seated or low-activity role.",
         },
@@ -73,9 +73,9 @@ const CalculatorProvider = ({ children }) => {
     Timeframe: {
       id: "7",
       options: [
-        ["gradual", "70"],
-        ["moderate", "71"],
-        ["aggresive", "72"],
+        ["Gradual", "70"],
+        ["Moderate", "71"],
+        ["Aggressive", "72"],
       ],
       val: "",
       expectedValueType: "char",
@@ -85,8 +85,8 @@ const CalculatorProvider = ({ children }) => {
       id: "8",
       options: [
         ["Gain weight", "80"],
-        ["lose weight", "81"],
-        ["maintain current weight", "82"],
+        ["Lose weight", "81"],
+        ["Maintain current weight", "82"],
       ],
       val: "",
       expectedValueType: "char",
@@ -109,14 +109,14 @@ const CalculatorProvider = ({ children }) => {
     backgroundColor: "#084941",
   });
   const [showResultCard, setShowResultCard] = useState(false);
-  const ALL_INPUTS_VALID_MSG = 'All inputs are filled and valid!'
+  const ALL_INPUTS_VALID_MSG = "All inputs are filled and valid!";
   const [inputsValidity, setInputsValidity] = useState({
     hasInvalidInputs: null,
     msg: null,
     invalidInputName: null,
   });
+  const [caloriesTotal, setCaloriesTotal] = useState(null);
 
-  
   const btnSwitch = () => {
     setSystemInfo((prevState) =>
       prevState === "Metric system" ? "Imperial system" : "Metric system"
@@ -124,13 +124,18 @@ const CalculatorProvider = ({ children }) => {
     setUserData((prev) => {
       const updatedInputValues = {};
       for (const key in prev) {
+        if(key === 'Activity level'){
+          updatedInputValues[key] = { ...prev[key], val: "Sedentary" };
+        }
+        else{
         updatedInputValues[key] = { ...prev[key], val: "" };
       }
+    }
       return updatedInputValues;
     });
-    setActivityLevel((prev) => {
-      return { ...prev, name: "Sedentary", idx: 0 };
-    });
+    setActivityLevel((prev) => ({
+       ...prev, name: "Sedentary", idx: 0,
+    }));
     setShowResultCard(false);
   };
 
@@ -173,8 +178,8 @@ const CalculatorProvider = ({ children }) => {
 
   const checkInputsValidity = () => {
     let hasInvalidInputs = false;
-    const validateNumber = (value) => /^[1-9]\d*$/.test(value) && value.length >= 2;
-    
+    //const validateNumber = (value) => /^[1-9]\d{1,2}$/.test(value);
+    const validateNumber = (value) => /^[1-9]\d{0,2}(\.\d+)?$/.test(value);
 
     for (const property in userData) {
       const propertyValue = userData[property];
@@ -182,57 +187,168 @@ const CalculatorProvider = ({ children }) => {
       const goalWeightVal = parseInt(userData["Goal Weight"].val);
       const weightGoal = userData["Weight Goal"].val;
 
-      // This checks if any input has invalid values: A.K.A ANYTHING beside numbers 
-      if( (propertyValue.expectedValueType === "number" && !validateNumber(propertyValue.val)) 
-         || 
-         (propertyValue.expectedValueType === "char" && propertyValue.val.trim() === "")
-        ) {
+      // This checks if any input has invalid values: A.K.A ANYTHING beside numbers
+       if (
+        (propertyValue.expectedValueType === "number" &&
+          !validateNumber(propertyValue.val)) ||
+        (propertyValue.expectedValueType === "char" &&
+          propertyValue.val.trim() === "")
+      ) {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true, 'Inputs should ONLY contain positive whole numbers and NOT be empty.', propertyValue.title);
+        updateInputValidity(
+          true,
+          "Inputs should ONLY contain positive whole numbers, NOT be more than 3 digits, and NOT be empty.",
+          propertyValue.title
+        );
         return inputsValidity; // Terminate the loop immediately when an invalid input is found
-      } 
+      }
+
+
       // if the current weight is less than the goal weight, then the weight goal can't be "loss weight"
-      else if (currentWeightVal < goalWeightVal && weightGoal === "lose weight") {
+      else if (
+        currentWeightVal < goalWeightVal &&
+        weightGoal === "Lose weight"
+      ) {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true, 'Your current weight should be higher than your goal weight for a "Lose Weight" goal.', propertyValue.title);
+        updateInputValidity(
+          true,
+          'Your current weight should be higher than your goal weight for a "Lose Weight" goal.',
+          propertyValue.title
+        );
         return inputsValidity;
-      } 
+      }
       // if the current weight is more than the goal weight, then the weight goal can't be "gain weight"
-      else if (currentWeightVal > goalWeightVal && weightGoal === "Gain weight") {
+      else if (
+        currentWeightVal > goalWeightVal &&
+        weightGoal === "Gain weight"
+      ) {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true,'Your current weight should be lower than your goal weight for a "Gain Weight" goal.', propertyValue.title);
-        return inputsValidity
-      } 
-      // if the current weight is not equal to the goal weight, then user can't choose "maintain current weight" as a weight goal
-      else if (currentWeightVal !== goalWeightVal && weightGoal === "maintain current weight") {
-        hasInvalidInputs = true;
-        setShowResultCard(false);
-        updateInputValidity(true, 'If your goal is to "Maintain Current Weight", the current weight and goal weight should be the same. Please enter the same value for both.', propertyValue.title);
+        updateInputValidity(
+          true,
+          'Your current weight should be lower than your goal weight for a "Gain Weight" goal.',
+          propertyValue.title
+        );
         return inputsValidity;
-      } 
-      // if the current weight is equal to the goal weight, then user can't choose anything beside "maintain current weight" as a weight goal
-      else if (currentWeightVal === goalWeightVal && weightGoal !== "maintain current weight") {
+      }
+      // if the current weight is not equal to the goal weight, then user can't choose "maintain current weight" as a weight goal
+      else if (
+        currentWeightVal !== goalWeightVal &&
+        weightGoal === "Maintain current weight"
+      ) {
         hasInvalidInputs = true;
         setShowResultCard(false);
-        updateInputValidity(true, 'If your goal is not to "Maintain Current Weight," having the same value for both current and goal weight might not be in line with your intended weight change. Please review your weight goal to ensure it accurately represents your intentions.', propertyValue.title);
+        updateInputValidity(
+          true,
+          'If your goal is to "Maintain Current Weight", the current weight and goal weight should be the same. Please enter the same value for both.',
+          propertyValue.title
+        );
+        return inputsValidity;
+      }
+      // if the current weight is equal to the goal weight, then user can't choose anything beside "maintain current weight" as a weight goal
+      else if (
+        currentWeightVal === goalWeightVal &&
+        weightGoal !== "Maintain current weight"
+      ) {
+        hasInvalidInputs = true;
+        setShowResultCard(false);
+        updateInputValidity(
+          true,
+          'If your goal is not to "Maintain Current Weight," having the same value for both current and goal weight might not be in line with your intended weight change. Please review your weight goal to ensure it accurately represents your intentions.',
+          propertyValue.title
+        );
         return inputsValidity;
       }
     }
 
     if (!hasInvalidInputs) {
-      updateInputValidity(false, ALL_INPUTS_VALID_MSG, '');
+      updateInputValidity(false, ALL_INPUTS_VALID_MSG, "");
       setShowResultCard(true);
+      return inputsValidity;
     }
     return inputsValidity;
   };
- 
-  const getResult = () => {
-    checkInputsValidity();
-  };
 
+  function convertToMetricValues(type, val){
+    if(type === 'Weight'){
+      const kg = val / (2.2)
+      return kg?.toFixed(0);
+    }
+    if(type === 'Height'){
+     const centimeters = val * 30.48;
+     return centimeters?.toFixed(0);
+  }
+}
+
+  const getResult = () => {
+   checkInputsValidity();
+    const gender = userData['Gender'].val;
+    let weight = userData['Current Weight'].val;
+    let height = userData['Height'].val;
+    const age = userData['Age'].val;
+    const activityLevel = {
+      Sedentary: 1.2,
+      "Lightly Active": 1.375,
+      "Moderately Active": 1.55,
+      "Very Active": 1.725,
+    }[userData['Activity level'].val];
+
+    const weightGoal = userData['Weight Goal'].val;
+    const timeframe = userData['Timeframe'].val;
+
+    if(systemInfo === 'Imperial system'){
+      weight = convertToMetricValues('Weight', weight);
+      height = convertToMetricValues('Height', height);
+    }
+
+    /*if(height.length === 1){
+     height += '.0'
+    }*/
+  
+    const harrisBenedictCoefficients = {
+      Male: { a: 66.5, b: 13.75, c: 5.003, d: 6.75 },
+      Female: { a: 655.1, b: 9.563, c: 1.850, d: 4.676 },
+      Other: { a: 100, b: 10, c: 5, d: 5 }, // Define coefficients for "other"
+    };
+    
+    const genderCoefficients = harrisBenedictCoefficients[gender];
+    const BMR = genderCoefficients?.a + (genderCoefficients?.b * weight) + (genderCoefficients?.c * height) - (genderCoefficients?.d * age);
+    console.log(height)
+    let TDEE = BMR * activityLevel;
+  
+    if (weightGoal === 'Maintain current weight') {
+      setCaloriesTotal(TDEE);
+    } 
+    else {
+      const weightChangeCoefficients = {
+        "Gain weight": {
+          Gradual: 500,
+          Moderate: 750,
+          Aggressive: 1000,
+        },
+        "Lose weight": {
+          Gradual: 250,
+          Moderate: 375,
+          Aggressive: 500,
+        },
+      }[weightGoal];
+  
+      if (weightChangeCoefficients && weightChangeCoefficients[timeframe]) {
+        if (weightGoal === 'Lose weight') {
+          TDEE -= weightChangeCoefficients[timeframe]; // Adjust for weight loss
+        } else {
+          TDEE += weightChangeCoefficients[timeframe];
+        }
+        setCaloriesTotal(TDEE);
+      } else {
+        // Handle invalid weightGoal and timeframe combinations
+        console.error("Invalid weightGoal or timeframe combination");
+      }
+    }
+  };
+  
 
   useEffect(() => {
     setDivStyle((prevDivStyle) => ({
@@ -244,6 +360,7 @@ const CalculatorProvider = ({ children }) => {
     }));
   }, [systemInfo]);
 
+console.log(userData);  
   return (
     <CalculatorContext.Provider
       value={{
@@ -258,12 +375,14 @@ const CalculatorProvider = ({ children }) => {
         showResultCard,
         inputsValidity,
         ALL_INPUTS_VALID_MSG,
+        caloriesTotal,
       }}
     >
       {children}
     </CalculatorContext.Provider>
   );
 };
+
 
 const useCalculatorContext = () => {
   return useContext(CalculatorContext);

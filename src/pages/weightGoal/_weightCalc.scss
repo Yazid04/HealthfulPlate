@@ -114,7 +114,8 @@
           }
           .input-parent input::placeholder {
             color: $textClr;
-            font-weight: bold;
+            font-weight: lighter;
+            font-size: .9rem;
           }
         }
         .single-parameter-parent:not(.custom) {

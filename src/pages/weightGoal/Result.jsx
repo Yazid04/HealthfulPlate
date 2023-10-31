@@ -3,15 +3,15 @@ import { useCalculatorContext } from "./CalculatorContext";
 import { BsFillClipboard2Fill } from "react-icons/bs";
 
 const Result = () => {
-  const { ALL_INPUTS_VALID_MSG, showResultCard, userData, inputsValidity } =
+  const { ALL_INPUTS_VALID_MSG, showResultCard, userData, inputsValidity, caloriesTotal } =
     useCalculatorContext();
-
     const iconRef = useRef(null);
-
+    const resultToNumber = caloriesTotal?.toFixed(0);
+  
     function showCopiedMsg(){
       // Add the "show" class
     iconRef.current.classList.add("show");
-    navigator.clipboard.writeText("Yazid, i love you!")
+    navigator.clipboard.writeText(resultToNumber);
 
     // Remove the "show" class after 2 seconds
     setTimeout(() => {
@@ -35,7 +35,7 @@ const Result = () => {
             <p className="sub">
               For your goal of "{userData["Weight Goal"].val}" we've calculated
               your daily calorie intake to help you achieve this. Your
-              recommended daily calorie intake is [Calories/day].
+              recommended daily calorie intake is ~{resultToNumber} calories per day.
             </p>
           </div>
           <div className="disclaimer-msg">

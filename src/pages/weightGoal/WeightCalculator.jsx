@@ -92,6 +92,26 @@ const WeightCalculator = () => {
         </div>
       );
     } else {
+      if(item.title === 'Height'){
+        return (
+          <div key={item.id} className="single-parameter-parent">
+            <div className="header">{item.title}: </div>
+            <div
+              className={`input-parent ${
+                invalidInputName === item.title && "error"
+              }`}
+            >
+             <input
+               placeholder={`Example: ${systemInfo === 'Metric system' ? '188 meaning 188cm' : '6.2, 5.8, 5.0, etc.'}`}
+               type="text"
+               name={item.title}
+               value={item.val}
+               onChange={(e) => handleChange(e)}
+             />
+            </div>
+          </div>
+        );
+      }
       return (
         <div key={item.id} className="single-parameter-parent">
           <div className="header">{item.title}: </div>
@@ -100,12 +120,12 @@ const WeightCalculator = () => {
               invalidInputName === item.title && "error"
             }`}
           >
-            <input
-              type="text"
-              name={item.title}
-              value={item.val}
-              onChange={(e) => handleChange(e)}
-            />
+           <input
+             type="text"
+             name={item.title}
+             value={item.val}
+             onChange={(e) => handleChange(e)}
+           />
           </div>
         </div>
       );
@@ -155,5 +175,6 @@ export default WeightCalculator;
 // Apply a copy to clipboard functionality - DONE
 // reduce the number css lines (apply more dynamic scss) - DONE
 // make the messages for gain and lose weight more user-friendly - DONE  
-// study the calculation process
-// Apply
+// study the calculation process - DONE
+// Apply the calculations - DONE
+// Adjust the calculations so that i works for both Metric and Imperial systems. - DONE

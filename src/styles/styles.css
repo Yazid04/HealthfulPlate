@@ -807,11 +807,13 @@
 }
 .wrapper .wrapper-center .calculation-panel-parent .panel-center .single-parameter-parent:not(.custom) .input-parent input::-moz-placeholder {
   color: #084941;
-  font-weight: bold;
+  font-weight: lighter;
+  font-size: 0.9rem;
 }
 .wrapper .wrapper-center .calculation-panel-parent .panel-center .single-parameter-parent:not(.custom) .input-parent input::placeholder {
   color: #084941;
-  font-weight: bold;
+  font-weight: lighter;
+  font-size: 0.9rem;
 }
 .wrapper .wrapper-center .calculation-panel-parent .panel-center .single-parameter-parent:not(.custom) .input-parent.error input {
   border: 2px solid red;
