@@ -15,13 +15,6 @@ const NavBar = () => {
     },
     {
       id: useId(),
-      name: "Services",
-      icon: null,
-      linkAddress: "Services",
-      clicked: false,
-    },
-    {
-      id: useId(),
       name: "Contact us",
       icon: false,
       linkAddress: "Contact",

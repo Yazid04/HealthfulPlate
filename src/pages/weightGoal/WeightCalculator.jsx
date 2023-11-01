@@ -178,4 +178,5 @@ export default WeightCalculator;
 // study the calculation process - DONE
 // Apply the calculations - DONE
 // Adjust the calculations so that it works for both Metric and Imperial systems - DONE
-// fix the copy paste functionality error for phone users
+// fix the copy paste functionality error for phone users - DONE
+// fix the services and constact us links - DONE
