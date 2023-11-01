@@ -177,4 +177,5 @@ export default WeightCalculator;
 // make the messages for gain and lose weight more user-friendly - DONE  
 // study the calculation process - DONE
 // Apply the calculations - DONE
-// Adjust the calculations so that i works for both Metric and Imperial systems. - DONE
+// Adjust the calculations so that it works for both Metric and Imperial systems - DONE
+// fix the copy paste functionality error for phone users

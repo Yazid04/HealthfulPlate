@@ -302,10 +302,6 @@ const CalculatorProvider = ({ children }) => {
       weight = convertToMetricValues('Weight', weight);
       height = convertToMetricValues('Height', height);
     }
-
-    /*if(height.length === 1){
-     height += '.0'
-    }*/
   
     const harrisBenedictCoefficients = {
       Male: { a: 66.5, b: 13.75, c: 5.003, d: 6.75 },
