@@ -359,8 +359,7 @@ const CalculatorProvider = ({ children }) => {
           : "translateX(0%)",
     }));
   }, [systemInfo]);
-
-console.log(userData);  
+  
   return (
     <CalculatorContext.Provider
       value={{
