@@ -168,15 +168,3 @@ const WeightCalculator = () => {
   );
 };
 export default WeightCalculator;
-
-
-// Close the result box when there is invalid Input - DONE
-// Put a warning message in the result box - DONE 
-// Apply a copy to clipboard functionality - DONE
-// reduce the number css lines (apply more dynamic scss) - DONE
-// make the messages for gain and lose weight more user-friendly - DONE  
-// study the calculation process - DONE
-// Apply the calculations - DONE
-// Adjust the calculations so that it works for both Metric and Imperial systems - DONE
-// fix the copy paste functionality error for phone users - DONE
-// fix the services and constact us links - DONE
