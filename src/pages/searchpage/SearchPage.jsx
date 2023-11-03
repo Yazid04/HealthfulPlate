@@ -23,7 +23,6 @@ export const SearchPage = () => {
     // continue here
   };
 
-
   return (
     <>
       <NavBar />
