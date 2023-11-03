@@ -39,6 +39,13 @@ const NavBar = () => {
     });
   };
 
+  const scrollToContactInfo = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth", // You can use 'auto' instead of 'smooth' for instant scrolling
+    });
+  };
+
   const handleScrollBarToggle = () => {
     setIsNavOpen(!isNavOpen);
   };
@@ -61,7 +68,10 @@ const NavBar = () => {
       <section className={`nav-wrapper`}>
         <div className="nav-wrapper-center">
           <h1 className="header">
-            <Link to={`/`}> <span>Healthful</span>plate</Link>
+            <Link to={`/`}>
+              {" "}
+              <span>Healthful</span>plate
+            </Link>
           </h1>
           <div
             className="hamburger-icon"
@@ -71,17 +81,25 @@ const NavBar = () => {
           </div>
           <div className="links">
             {links.map((link) => {
-              if (link.name === "Search") {
+              if (link.name === "Contact us") {
                 return (
-                  <div key={link.id} type="button" href="#" className="link">
-                    <Link to={`/${link.linkAddress}`}>{link.icon}</Link>
+                  <div
+                    key={link.id}
+                    type="button"
+                    href="#"
+                    className="link"
+                    onClick={scrollToContactInfo}
+                  >
+                    <div>{link.name === "Search" ? link.icon : link.name}</div>
                   </div>
                 );
               } else {
                 return (
-                  <button key={link.id} type="button" href="#" className="link">
-                    <Link to={`/${link.linkAddress}`}>{link.name}</Link>
-                  </button>
+                  <div key={link.id} type="button" href="#" className="link">
+                    <Link to={`/${link.linkAddress}`}>
+                      {link.name === "Search" ? link.icon : link.name}
+                    </Link>
+                  </div>
                 );
               }
             })}
