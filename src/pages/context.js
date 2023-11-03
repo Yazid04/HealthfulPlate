@@ -13,7 +13,6 @@ const AppProvider = ({ children }) => {
   const BASE_URL = "https://api.edamam.com/api/recipes/v2?type=public&";
   const SEARCH_ENDPOINT = `${BASE_URL}q=${query.length < 1 ? 'cookies' : query}&app_id=${APP_ID}&app_key=${API_KEY}`
 
-
   const searchRecipes = useCallback(async () => {
     setDataState((prevState) => ({
       ...prevState,

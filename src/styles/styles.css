@@ -639,8 +639,9 @@
   padding: 1rem 2rem;
 }
 .search-wrapper .search-results-parent .recipe-parent {
-  width: 250px;
-  height: 400px;
+  width: 260px;
+  height: -moz-min-content;
+  height: min-content;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   overflow: hidden;
@@ -674,13 +675,27 @@
   line-height: 2rem;
   font-size: 0.8rem;
 }
+.search-wrapper .search-results-parent .recipe-parent .sub-recipe.info .total-kcal {
+  padding: 0 1rem;
+  margin: 1rem 0;
+}
+.search-wrapper .search-results-parent .recipe-parent .sub-recipe.info .nutrients {
+  padding: 0 1rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  height: -moz-min-content;
+  height: min-content;
+}
+.search-wrapper .search-results-parent .recipe-parent .sub-recipe.info .nutrients .single-nutrient {
+  width: 100%;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 @media screen and (min-width: 800px) {
-  .search-wrapper .search-input-parent {
-    /*.filter-options.show-filters{
-      height: 35rem;
-    }*/
-  }
   .search-wrapper .search-input-parent .center {
     justify-content: flex-start;
   }

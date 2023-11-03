@@ -2,34 +2,27 @@
   margin-top: 5rem;
   width: 100%;
   height: min-content;
-  //background-color: aqua;
 
   .search-input-parent {
     width: 80%;
     margin: auto;
-    //background-color: burlywood;
-    //box-shadow: $shadow;
     padding: 2rem 0;
 
     .center {
       display: flex;
       justify-content: center;
       display: block;
-      //background-color: red;
 
       .searchBar-center {
         display: flex;
         position: relative;
-        //background-color: red;
 
         .input {
           all: unset;
           background-color: $textClr;
           color: $primaryClr;
           padding: 1rem;
-          //min-width: 18rem;
           width: 100%;
-          //width: 17rem;
           border-radius: 25px;
         }
 
@@ -52,7 +45,7 @@
         }
       }
   }
-  }
+}
 
   .search-results-parent {
     //background-color: chartreuse;
@@ -64,17 +57,15 @@
     padding: 1rem 2rem;
 
     .recipe-parent {
-      width: 250px;
-      height: 400px;
+      width: 260px;
+      height: min-content;
       border-radius: 10px;
       box-shadow: $shadow;
       overflow: hidden;
-     // background-color: blueviolet;
       display: flex;
       flex-direction: column;
 
       .sub-recipe.img {
-        //flex: 50%;
         height: 165px;
         background-color: black;
         img {
@@ -84,7 +75,6 @@
         }
       }
       .sub-recipe.info {
-        //flex: 50%;
         height: min-content;
         padding-bottom: 1rem;
         .recipe-name {
@@ -94,11 +84,30 @@
           line-height: 1.2rem;
           padding: 0 1rem;
           font-size: 0.8rem;
-        
+
         .label{
           line-height: 2rem;
           font-size: .8rem;
         }
+        }
+        .total-kcal{
+         padding: 0 1rem;
+         margin: 1rem 0;
+        }
+        .nutrients{
+          padding: 0 1rem;
+          margin: 1rem 0;
+          display: flex;
+          flex-direction: column;
+          height: min-content;
+
+          .single-nutrient{
+            width: 100%;
+            margin: .5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
         }
       }
     }
@@ -112,9 +121,6 @@
         .center{
             justify-content: flex-start;
         }
-        /*.filter-options.show-filters{
-          height: 35rem;
-        }*/
     }    
  }
 }

@@ -5,7 +5,6 @@ import { useGlobalContext } from "../context";
 import Loading from "../../shared/Loading";
 import Error from "../../shared/Error";
 import NotFound from "../../shared/NotFound";
-import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 
 export const SearchPage = () => {
@@ -18,20 +17,12 @@ export const SearchPage = () => {
     setInputValue(e.target.value);
   };
 
-  function extractIdFromString(inputString) {
-    const indexOfUnderscore = inputString.lastIndexOf("_");
-    if (indexOfUnderscore !== -1) {
-      return inputString.slice(indexOfUnderscore + 1);
-    } else {
-      return null; // Return null if no underscore is found
-    }
-  }
-
   const handleQuerySubmit = (e) => {
     e.preventDefault();
     setQuery(inputValue);
-    // continue here  
+    // continue here
   };
+
 
   return (
     <>
@@ -57,20 +48,20 @@ export const SearchPage = () => {
           </div>
         </main>
         <>
-        {isLoading ? (
-          <Loading />
-        ) : error.hasError ? (
-          <Error />
-        ) : data?.hits.length < 1 ? (
-          <NotFound />
-        ) : (
-         <main className="search-results-parent">
-            {data?.hits?.map((item) => {
-              const { image, healthLabels, label, uri } = item.recipe;
-              const id = extractIdFromString(uri);
-              return (
-                <div key={id} className="recipe-parent">
-                  <Link to={`/Search/${id}`}>
+          {isLoading ? (
+            <Loading />
+          ) : error.hasError ? (
+            <Error />
+          ) : data?.hits.length < 1 ? (
+            <NotFound />
+          ) : (
+            <main className="search-results-parent">
+              {data?.hits?.map((item) => {
+                const { image, healthLabels, label, uri, calories, digest } =
+                  item.recipe;
+                const nutreints = digest.slice(0, 12);
+                return (
+                  <div key={uri} className="recipe-parent">
                     <div className="sub-recipe img">
                       <img src={image} alt="name" />
                     </div>
@@ -90,14 +81,29 @@ export const SearchPage = () => {
                             );
                           })}
                         </p>
+                        <div className="total-kcal">
+                          <h4>Total Calories: {calories.toFixed(0)}kcal</h4>
+                        </div>
+                        <div className="nutrients">
+                          {nutreints.map((item) => {
+                            return (
+                              <div className="single-nutrient">
+                                <p className="name">{item.label}</p>
+                                <p className="amount">
+                                  {item.total.toFixed(0)}
+                                  {item.unit}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </main>
-        )}
+                  </div>
+                );
+              })}
+            </main>
+          )}
         </>
       </section>
       <Footer />
