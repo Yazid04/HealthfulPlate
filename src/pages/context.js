@@ -4,7 +4,7 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const API_KEY = process.env.REACT_APP_EDAMAM_APIKEY;
   const APP_ID = process.env.REACT_APP_EDAMAM_APPID;
-  const [query, setQuery] = useState("pasta");
+  const [query, setQuery] = useState("");
   const [dataState, setDataState] = useState({
     isLoading: false,
     error: { hasError: false, msg: "" },
