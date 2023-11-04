@@ -1,8 +1,10 @@
 .search-wrapper {
-  margin-top: 5rem;
   width: 100%;
   height: min-content;
-
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-top: 5rem;
+ 
   .search-input-parent {
     width: 80%;
     margin: auto;

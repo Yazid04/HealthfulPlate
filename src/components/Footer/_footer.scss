@@ -4,6 +4,8 @@
   background-color: $textClr;
   display: grid;
   place-content: center;
+  max-width: 1400px;
+  margin: auto;
 
   .footer-center {
     display: flex;

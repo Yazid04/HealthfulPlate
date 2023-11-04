@@ -16,6 +16,8 @@
   width: 100%;
   margin: 0 auto;
   height: fit-content;
+  max-width: 1400px;
+  margin: auto;
   margin-bottom: 3rem;
   @include flex();
 

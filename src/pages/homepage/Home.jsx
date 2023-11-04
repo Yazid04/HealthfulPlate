@@ -6,11 +6,11 @@ import Footer from "../../components/Footer/Footer";
 
 export const Home = () => {
   return (
-    <>
+    <main style={{maxWidth: '1400px', margin: "auto"}}>
       <NavBar />
       <Hero />
       <Services />
       <Footer />
-    </>
+    </main>
   );
 };

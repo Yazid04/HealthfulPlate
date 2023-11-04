@@ -21,6 +21,8 @@
   left: 0;
   box-shadow: $shadow;
   height: min-content;
+  max-width: 1400px;
+  margin: auto;
   .nav-wrapper-center {
     @include flex(row, space-between, center);
     padding: 1.5rem;

@@ -9,6 +9,8 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   height: -moz-min-content;
   height: min-content;
+  max-width: 1400px;
+  margin: auto;
 }
 .nav-wrapper .nav-wrapper-center {
   display: flex;
@@ -494,6 +496,8 @@
   background-color: #084941;
   display: grid;
   place-content: center;
+  max-width: 1400px;
+  margin: auto;
 }
 .footer-wrapper .footer-center {
   display: flex;
@@ -586,10 +590,12 @@
 }
 
 .search-wrapper {
-  margin-top: 5rem;
   width: 100%;
   height: -moz-min-content;
   height: min-content;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-top: 5rem;
 }
 .search-wrapper .search-input-parent {
   width: 80%;
@@ -719,6 +725,8 @@
   margin: 0 auto;
   height: -moz-fit-content;
   height: fit-content;
+  max-width: 1400px;
+  margin: auto;
   margin-bottom: 3rem;
   display: flex;
   flex-direction: row;
