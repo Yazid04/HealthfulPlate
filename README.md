@@ -6,6 +6,14 @@
 "HealthfulPlate" is a vibrant and user-friendly React website that combines the best of nutrition and health. Featuring three distinct pages, the platform offers a diverse set of services. The home page provides an array of wellness resources and information. On the second page, users can easily search for recipes and get detailed nutritional facts for each recipe. However, the real gem of the website is its third page, a fairly comprehensive weight calculator (I worked very hard on this feature where I feel I can use such a word lol), designed to help users achieve their weight goals. This feature takes into account various input parameters such as current weight, goal weight, height, age, activity level, gender, and more, using formulas like the Harris-Benedict formula and TDEE, adjusted with the user's chosen timeframe. HealthfulPlate is designed with the intention of being a colorful and eye-pleasing platform. The codebase has reusable components, is readable and scalable, which makes it highly efficient for adjusting and scaling up the codebase.
 
 
+
+![CosmoQuest images](./src/static/screenShot1.png)
+![CosmoQuest images](./src/static/screenShot2.png)
+![CosmoQuest images](./src/static/screenShot3.png)
+![CosmoQuest images](./src/static/screenShot4.png)
+
+
+
 ## Technologies Used :
 
 - React js
